@@ -1,4 +1,4 @@
-import type { CSSProperties, ElementType } from 'react'
+import { Fragment, type CSSProperties, type ElementType } from 'react'
 
 type Props = { texte: string; className?: string; as?: ElementType }
 
@@ -11,12 +11,14 @@ export default function Titre({ texte, className = 'titre', as: Balise = 'h2' }:
   return (
     <Balise className={className} aria-label={texte}>
       {mots.map((mot, i) => (
-        <span key={i} className="mot" aria-hidden="true">
-          <span className="mot__interieur" style={{ '--i': i } as CSSProperties}>
-            {mot}
+        <Fragment key={i}>
+          <span className="mot" aria-hidden="true">
+            <span className="mot__interieur" style={{ '--i': i } as CSSProperties}>
+              {mot}
+            </span>
           </span>
-          {i < mots.length - 1 ? ' ' : ''}
-        </span>
+          {i < mots.length - 1 ? ' ' : null}
+        </Fragment>
       ))}
     </Balise>
   )

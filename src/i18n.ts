@@ -126,6 +126,19 @@ const FR = {
       cuisine: 'La cuisine ouverte',
     },
   },
+  maison: {
+    indice: 'Faites défiler pour ouvrir la maison',
+    legende: 'Évocation en 3D, d’après les photos du restaurant',
+    afficheAlt:
+      'Le restaurant Gigi en coupe, comme une maison de poupée : grande salle, bar, escalier vert et salle aux citrons',
+    pieces: [
+      'Une longue table nappée de blanc, des banquettes rayées, des statues rose saumon et un plafond en miroirs.',
+      'Des tabourets rose saumon sur un sol vert rayé de blanc, sous des stores rouge et blanc.',
+      'Des briques vertes d’un côté, des citrons de l’autre.',
+      'Des citrons du sol au plafond, des guéridons nappés et des lampes tenues par des bras sculptés.',
+    ],
+    fin: 'Une table vous attend',
+  },
   infos: {
     surtitre: 'Info',
     titre: 'Horaires et accès',
@@ -291,6 +304,19 @@ const NL: Textes = {
       cuisine: 'De open keuken',
     },
   },
+  maison: {
+    indice: 'Scroll om het huis te openen',
+    legende: '3D-impressie, naar de foto’s van het restaurant',
+    afficheAlt:
+      'Het restaurant Gigi in doorsnede, als een poppenhuis: grote zaal, bar, groene trap en citroenzaal',
+    pieces: [
+      'Een lange tafel met wit tafellaken, gestreepte banken, zalmroze beelden en een spiegelplafond.',
+      'Zalmroze krukken op een groene vloer met witte lijnen, onder rood-witte luifels.',
+      'Groene bakstenen aan de ene kant, citroenen aan de andere.',
+      'Citroenen van vloer tot plafond, gedekte tafeltjes en lampen gedragen door gebeeldhouwde armen.',
+    ],
+    fin: 'Er wacht een tafel op je',
+  },
   infos: {
     surtitre: 'Info',
     titre: 'Openingsuren en bereikbaarheid',
@@ -453,6 +479,19 @@ const EN: Textes = {
       boite: 'The pizza box',
       cuisine: 'The open kitchen',
     },
+  },
+  maison: {
+    indice: 'Scroll to open the house',
+    legende: '3D impression, based on photos of the restaurant',
+    afficheAlt:
+      'Gigi in cross-section, like a doll’s house: main room, bar, green staircase and lemon room',
+    pieces: [
+      'A long white-clothed table, striped benches, salmon-pink statues and a mirrored ceiling.',
+      'Salmon-pink stools on a green floor striped with white, under red and white awnings.',
+      'Green bricks on one side, lemons on the other.',
+      'Lemons from floor to ceiling, clothed side tables and lamps held by sculpted arms.',
+    ],
+    fin: 'A table is waiting for you',
   },
   infos: {
     surtitre: 'Info',

@@ -26,6 +26,7 @@ for (const appareil of APPAREILS) {
   // Affiche tout (apparitions au défilement, images différées) pour la capture pleine page
   await page.evaluate(async () => {
     document.querySelectorAll('[data-reveal]').forEach((e) => e.classList.add('is-visible'))
+    document.querySelectorAll('.titre').forEach((e) => e.classList.add('titre--visible'))
     document.querySelectorAll('img').forEach((i) => (i.loading = 'eager'))
     await Promise.all(Array.from(document.images).map((i) => i.decode().catch(() => {})))
     document.documentElement.style.scrollBehavior = 'auto'
