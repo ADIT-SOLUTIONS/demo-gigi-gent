@@ -2,6 +2,7 @@ import { ADRESSE, CONTACT, HORAIRES, LIENS, ORDRE_JOURS } from '../data/infos'
 import { useLangue } from '../hooks/useLangue'
 import { useStatut } from '../hooks/useStatut'
 import { Filet, Rose } from './Emblemes'
+import Titre from './Titre'
 
 export default function Infos() {
   const { t } = useLangue()
@@ -12,7 +13,7 @@ export default function Infos() {
       <div className="container">
         <header className="section__entete" data-reveal>
           <p className="surtitre">{t.infos.surtitre}</p>
-          <h2 className="titre">{t.infos.titre}</h2>
+          <Titre texte={t.infos.titre} />
           <Filet />
         </header>
 

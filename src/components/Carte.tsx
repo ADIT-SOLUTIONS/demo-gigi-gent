@@ -3,6 +3,7 @@ import { CARTE } from '../data/carte'
 import { LIENS } from '../data/infos'
 import { useLangue } from '../hooks/useLangue'
 import { Filet, Logo } from './Emblemes'
+import Titre from './Titre'
 
 const LOCALES = { nl: 'nl-BE', en: 'en-BE', fr: 'fr-BE' } as const
 
@@ -37,7 +38,7 @@ export default function Carte() {
       <div className="container">
         <header className="section__entete section__entete--centre" data-reveal>
           <p className="surtitre">{t.carte.surtitre}</p>
-          <h2 className="titre">{t.carte.titre}</h2>
+          <Titre texte={t.carte.titre} />
           <p className="section__intro">{t.carte.intro}</p>
         </header>
 

@@ -3,6 +3,7 @@ import { useLangue } from '../hooks/useLangue'
 import { Filet, Rose } from './Emblemes'
 import Photo from './Photo'
 import { sansCoupure } from '../utils/texte'
+import Titre from './Titre'
 
 export default function Amore() {
   const { t } = useLangue()
@@ -11,7 +12,7 @@ export default function Amore() {
       <div className="container">
         <header className="section__entete section__entete--centre" data-reveal>
           <p className="surtitre">{t.amore.surtitre}</p>
-          <h2 className="titre">{t.amore.titre}</h2>
+          <Titre texte={t.amore.titre} />
           <Filet />
         </header>
 
