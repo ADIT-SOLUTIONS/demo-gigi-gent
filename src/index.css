@@ -360,6 +360,7 @@ textarea {
 }
 
 .statut__point {
+  position: relative;
   flex: none;
   width: 9px;
   height: 9px;
@@ -369,21 +370,33 @@ textarea {
 
 .statut--ouvert .statut__point {
   background: #2f8a57;
-  box-shadow: 0 0 0 0 rgba(47, 138, 87, 0.5);
+}
+
+/* Pouls de la pastille « ouvert » : un anneau qui s'agrandit (transformation seule, aucune repeinture) */
+.statut--ouvert .statut__point::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(47, 138, 87, 0.45);
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .statut--ouvert .statut__point {
+  .statut--ouvert .statut__point::after {
     animation: pouls 2.4s ease-out infinite;
   }
 }
 
 @keyframes pouls {
-  70% {
-    box-shadow: 0 0 0 9px rgba(47, 138, 87, 0);
+  0% {
+    opacity: 1;
+    transform: scale(1);
   }
+  70%,
   100% {
-    box-shadow: 0 0 0 0 rgba(47, 138, 87, 0);
+    opacity: 0;
+    transform: scale(3);
   }
 }
 
