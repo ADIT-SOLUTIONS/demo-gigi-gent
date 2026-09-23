@@ -62,7 +62,7 @@ Instagram mentionne un brunch le dimanche (« ☀️day Brunch ») : contenu et 
 | E-mail | info@gigi6161.be | gigi6161.be/contact, Instagram |
 | Réservation | Zenchef : https://bookings.zenchef.com/results?rid=374272&pid=1001 | gigi6161.be |
 | Carte cadeau | Resengo : https://www.resengo.com/Code/Webshop/?AID=1&LC=NL&CompanyID=1769161 (lien à vérifier : l'ancienne page de réservation Resengo redirige vers Zenchef) | gigi6161.be |
-| À emporter, livraison | Uber Eats (lien trouvé), Deliveroo (cité sur leur site, lien non trouvé) | gigi6161.be/order, Google |
+| À emporter, livraison | Uber Eats et Deliveroo (pages trouvées) | gigi6161.be/order, ubereats.com, deliveroo.be |
 | Prix | 20 à 40 € par personne | Google |
 | Avis | Google 4,1/5 (2 966 avis) ; Tripadvisor 2,6/5 (284 avis, plaintes sur l'attente et le service) | Google, Tripadvisor |
 
