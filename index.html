@@ -1,66 +1,30 @@
 <!doctype html>
-<html lang="nl">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Gigi | Italiaans restaurant in Gent, Belfortstraat 24</title>
-    <meta
-      name="description"
-      content="Gigi, cucina amorosa in Gent: pizza, handgemaakte pasta, antipasti en spritz in een interieur van Jean-Philippe Demeyer, Belfortstraat 24. Online reserveren."
-    />
-    <meta name="theme-color" content="#eee2ca" />
-    <!-- Maquette pour présentation aux gérants : à retirer pour la mise en ligne définitive -->
+    <title>Gigi | Démo du site, version classique et version immersive</title>
+    <meta name="description" content="Maquettes du site de Gigi, restaurant italien Belfortstraat 24 à Gand." />
+    <meta name="theme-color" content="#2a0712" />
+    <!-- Démo des maquettes : à retirer pour la mise en ligne définitive -->
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href="https://[DOMAINE]/" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Gigi" />
-    <meta property="og:title" content="Gigi | Cucina amorosa, Gent" />
-    <meta property="og:description" content="Pizza, pasta, antipasti en spritz, Belfortstraat 24 in Gent." />
-    <meta property="og:url" content="https://[DOMAINE]/" />
-    <meta property="og:image" content="https://[DOMAINE]/images/og-image.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <link rel="preload" as="image" href="/images/salle-citrons.webp" imagesrcset="/images/salle-citrons-460.webp 460w, /images/salle-citrons.webp 683w" imagesizes="(max-width: 767px) 86vw, (max-width: 1023px) 60vw, 440px" fetchpriority="high" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Restaurant",
-        "name": "Gigi",
-        "alternateName": "GIGI6161",
-        "description": "Cucina amorosa: Italiaans restaurant in Gent, pizza, pasta, antipasti en cocktails.",
-        "servesCuisine": ["Italian", "Pizza"],
-        "priceRange": "€€",
-        "image": "https://[DOMAINE]/images/og-image.jpg",
-        "url": "https://[DOMAINE]/",
-        "telephone": "+32479327271",
-        "email": "info@gigi6161.be",
-        "acceptsReservations": "https://bookings.zenchef.com/results?rid=374272&pid=1001",
-        "menu": "https://[DOMAINE]/#carte",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Belfortstraat 24",
-          "postalCode": "9000",
-          "addressLocality": "Gent",
-          "addressCountry": "BE"
-        },
-        "geo": { "@type": "GeoCoordinates", "latitude": 51.0555152, "longitude": 3.7273852 },
-        "openingHoursSpecification": [
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "17:30", "closes": "23:30" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "17:30", "closes": "22:30" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday"], "opens": "12:30", "closes": "14:30" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday"], "opens": "17:30", "closes": "23:30" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "12:00", "closes": "23:30" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "20:00" }
-        ],
-        "sameAs": ["https://www.instagram.com/gigi__6161/"]
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #2a0712;
       }
-    </script>
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src-v2/main.tsx"></script>
+    <!--
+      Démo : les deux versions sont chargées entièrement au démarrage, chacune dans son cadre
+      (/v1/ classique, /v2/ immersive), puis on passe de l'une à l'autre sans rechargement.
+    -->
+    <div id="demo" class="demo demo--chargement"></div>
+    <script type="module" src="/selecteur/selecteur.ts"></script>
   </body>
 </html>
