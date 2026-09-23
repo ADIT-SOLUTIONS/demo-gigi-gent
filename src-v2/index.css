@@ -356,14 +356,37 @@
   background: radial-gradient(60% 60% at 50% 45%, #5a1a2c, #2e0a16 55%, #14040a);
 }
 
+.maison__scene {
+  margin-inline: auto;
+}
+
 .maison__canvas {
   display: none;
+}
+
+.maison__affiche {
+  position: absolute;
+  inset: 0;
 }
 
 .maison__affiche img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.maison__affiche-portrait {
+  display: none;
+}
+
+@media (max-aspect-ratio: 19/20) {
+  .maison--anime .maison__affiche-portrait {
+    display: block;
+  }
+
+  .maison--anime .maison__affiche-paysage {
+    display: none;
+  }
 }
 
 .maison__textes {
@@ -484,11 +507,6 @@
 
 .maison--prete .maison__canvas {
   opacity: 1;
-}
-
-.maison--anime .maison__affiche img {
-  position: absolute;
-  inset: 0;
 }
 
 .maison--prete .maison__affiche {
@@ -758,11 +776,17 @@
   }
 }
 
-/* Éléments déplacés au défilement : couche dédiée dès le départ */
-[data-vitesse],
-.pilier__photo img,
-.carte-cadeau__photo img,
+/* Éléments déplacés au défilement : couche dédiée dès le départ (sur téléphone, seulement ceux qui bougent) */
+.hero [data-vitesse],
 .amore__image,
 .menu {
   will-change: transform;
+}
+
+@media (min-width: 768px) {
+  [data-vitesse],
+  .pilier__photo img,
+  .carte-cadeau__photo img {
+    will-change: transform;
+  }
 }

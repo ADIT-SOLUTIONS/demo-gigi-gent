@@ -201,10 +201,19 @@ export default function Maison() {
       <div className="maison__plateau">
         <div className="maison__scene">
           <canvas className="maison__canvas" aria-hidden="true" />
-          <picture className="maison__affiche">
-            <source media="(max-aspect-ratio: 19/20)" srcSet="/images/maison-3d-portrait.webp" />
-            <img src="/images/maison-3d.webp" alt={t.maison.afficheAlt} width="1600" height="1000" loading="lazy" decoding="async" />
-          </picture>
+          <div className="maison__affiche">
+            <img
+              className="maison__affiche-paysage"
+              src="/images/maison-3d.webp"
+              alt={t.maison.afficheAlt}
+              width="1600"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+            />
+            {/* Écran en portrait, pendant la préparation de la 3D ou après une perte de contexte : même cadrage que la scène */}
+            <img className="maison__affiche-portrait" src="/images/maison-3d-portrait.webp" alt="" width="900" height="1200" loading="lazy" decoding="async" />
+          </div>
         </div>
 
         <div className="maison__textes">

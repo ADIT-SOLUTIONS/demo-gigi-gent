@@ -17,7 +17,7 @@ export type Scene3D = {
   rendre: (temps: number) => void
   redimensionner: (largeur: number, hauteur: number) => void
   /** Image fixe de la maison ouverte et allumée (sert à produire public/images/maison-3d*.webp). */
-  affiche: (largeur: number, hauteur: number) => string
+  affiche: (largeur: number, hauteur: number, portrait?: boolean) => string
   detruire: () => void
 }
 
@@ -761,11 +761,12 @@ export async function creerScene(canvas: HTMLCanvasElement, options: OptionsScen
     renderer.render(scene, camera)
   }
 
-  const affiche = (l: number, h: number) => {
+  const affiche = (l: number, h: number, portrait = false) => {
     const avant = { largeur, hauteur, ratio }
     renderer.setPixelRatio(1)
     redimensionner(l, h)
-    zone = { x0: 0, x1: 1, y0: 0, y1: 1 }
+    // Portrait : même zone utile que la séquence (maison en haut, textes en bas)
+    zone = portrait ? { x0: 0, x1: 1, y0: 0.07, y1: 0.6 } : { x0: 0, x1: 1, y0: 0, y1: 1 }
     appliquer(T_OUVERTURE[1] + 6, 0)
     lumieres.fill(1)
     lumieres[LUEUR] = 0

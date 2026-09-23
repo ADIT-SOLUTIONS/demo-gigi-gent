@@ -42,9 +42,15 @@ export function useEffets() {
   useGSAP(() => {
     const mm = gsap.matchMedia()
     mm.add(
-      { anime: '(prefers-reduced-motion: no-preference)', souris: '(hover: hover) and (pointer: fine)' },
+      {
+        anime: '(prefers-reduced-motion: no-preference)',
+        souris: '(hover: hover) and (pointer: fine)',
+        // Téléphone : on garde l'accueil, le manifeste, la carte et la maison 3D ; les parallaxes secondaires
+        // (décor flottant, colonnes de la galerie, images des cuisines) coûtent trop à chaque image
+        complet: '(min-width: 768px)',
+      },
       (contexte) => {
-        const { anime, souris } = contexte.conditions as { anime: boolean; souris: boolean }
+        const { anime, souris, complet } = contexte.conditions as { anime: boolean; souris: boolean; complet: boolean }
         if (!anime) return
 
         // Parallaxe
@@ -52,6 +58,7 @@ export function useEffets() {
           const vitesse = Number(el.dataset.vitesse) || 0
           // Accueil : tout est en place au chargement, le décalage naît avec le défilement
           const accueil = el.closest<HTMLElement>('.hero')
+          if (!accueil && !complet) return
           if (accueil) {
             gsap.fromTo(
               el,
@@ -76,7 +83,7 @@ export function useEffets() {
         })
 
         // Photos de la cuisine : l'image glisse dans son arche (le cadre ne bouge pas, les textes restent à leur place)
-        gsap.utils.toArray<HTMLElement>('.pilier__photo img, .carte-cadeau__photo img').forEach((img) => {
+        if (complet) gsap.utils.toArray<HTMLElement>('.pilier__photo img, .carte-cadeau__photo img').forEach((img) => {
           gsap.fromTo(
             img,
             { scale: 1.16, yPercent: -6 },
