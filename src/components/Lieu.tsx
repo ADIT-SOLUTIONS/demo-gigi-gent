@@ -4,6 +4,7 @@ import type { Textes } from '../i18n'
 import { Filet } from './Emblemes'
 import Photo from './Photo'
 import { sansCoupure } from '../utils/texte'
+import Titre from './Titre'
 
 type Piece = keyof Textes['lieu']['pieces']
 
@@ -29,7 +30,7 @@ export default function Lieu() {
         <header className="section__entete lieu__entete" data-reveal>
           <div>
             <p className="surtitre">{t.lieu.surtitre}</p>
-            <h2 className="titre">{t.lieu.titre}</h2>
+            <Titre texte={t.lieu.titre} />
             <Filet />
           </div>
           <p className="section__intro">{sansCoupure(t.lieu.texte)}</p>

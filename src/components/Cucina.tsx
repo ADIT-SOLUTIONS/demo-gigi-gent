@@ -2,6 +2,7 @@ import { PHOTOS } from '../data/photos'
 import { useLangue } from '../hooks/useLangue'
 import { Filet } from './Emblemes'
 import Photo from './Photo'
+import Titre from './Titre'
 
 const VISUELS = [PHOTOS.pizzaiolo, PHOTOS.spaghetti, PHOTOS.platCitrons]
 
@@ -13,7 +14,7 @@ export default function Cucina() {
         <header className="section__entete cucina__entete" data-reveal>
           <div>
             <p className="surtitre">{t.cucina.surtitre}</p>
-            <h2 className="titre">{t.cucina.titre}</h2>
+            <Titre texte={t.cucina.titre} />
             <Filet />
           </div>
           <p className="section__intro">{t.cucina.texte}</p>

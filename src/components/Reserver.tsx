@@ -5,6 +5,7 @@ import { useLangue } from '../hooks/useLangue'
 import { envoyerDemande, type Demande } from '../utils/envoi'
 import { Filet } from './Emblemes'
 import Photo from './Photo'
+import Titre from './Titre'
 
 const VIDE: Demande = { nom: '', email: '', telephone: '', date: '', personnes: '', message: '' }
 
@@ -35,7 +36,7 @@ export default function Reserver() {
       <div className="container">
         <header className="section__entete section__entete--centre" data-reveal>
           <p className="surtitre">{t.reserver.surtitre}</p>
-          <h2 className="titre">{t.reserver.titre}</h2>
+          <Titre texte={t.reserver.titre} />
           <Filet />
           <p className="section__intro">{t.reserver.texte}</p>
           <div className="reserver__actions">
