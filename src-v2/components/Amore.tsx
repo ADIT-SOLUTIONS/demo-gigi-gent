@@ -12,7 +12,7 @@ import { sansCoupure } from '../../src/utils/texte'
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 /*
-  L'amore, version immersive : le manifeste s'allume mot à mot au fil du défilement,
+  L'amore, version immersive : le manifeste s'allume phrase après phrase au fil du défilement,
   la photo du banquet se resserre dans son cadre.
 */
 export default function Amore() {
@@ -30,7 +30,7 @@ export default function Amore() {
           {
             opacity: 1,
             ease: 'none',
-            stagger: 0.12,
+            stagger: 0.5,
             scrollTrigger: { trigger: q('.manifeste')[0], start: 'top 78%', end: 'bottom 52%', scrub: 0.6 },
           },
         )
@@ -60,12 +60,8 @@ export default function Amore() {
         <figure className="manifeste">
           <blockquote className="manifeste__texte">
             {t.amore.manifeste.map((ligne) => (
-              <p key={ligne}>
-                {ligne.split(' ').map((mot, i) => (
-                  <span key={i} className="eclat">
-                    {mot}{' '}
-                  </span>
-                ))}
+              <p key={ligne} className="eclat">
+                {ligne}
               </p>
             ))}
             <p className="manifeste__devise" lang="it">

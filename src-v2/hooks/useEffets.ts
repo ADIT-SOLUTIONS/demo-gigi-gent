@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
+// Couches GPU stables pendant les défilements (sinon le navigateur les crée et les défait sans cesse)
+gsap.config({ force3D: true })
 
 /*
   Effets communs de la version immersive, posés sur le contenu de la version classique :
@@ -82,15 +84,18 @@ export function useEffets() {
           )
         })
 
-        // La carte se déplie comme une carte papier posée sur la table
+        // La carte se déplie comme une carte papier posée sur la table (sur écran tactile, simple glissement :
+        // la perspective obligerait à redessiner tout le bloc à chaque image)
         const menu = document.querySelector<HTMLElement>('.menu')
-        if (menu) {
+        if (menu && souris) {
           gsap.set(menu, { transformPerspective: 1600, transformOrigin: '50% 0%' })
           gsap.fromTo(
             menu,
-            { rotationX: () => (window.innerWidth < 768 ? 9 : 22), y: 50 },
-            { rotationX: 0, y: 0, ease: 'none', scrollTrigger: { trigger: menu, start: 'top 98%', end: 'top 40%', scrub: 0.5, invalidateOnRefresh: true } },
+            { rotationX: 22, y: 50 },
+            { rotationX: 0, y: 0, ease: 'none', scrollTrigger: { trigger: menu, start: 'top 98%', end: 'top 40%', scrub: 0.5 } },
           )
+        } else if (menu) {
+          gsap.fromTo(menu, { y: 70 }, { y: 0, ease: 'none', scrollTrigger: { trigger: menu, start: 'top bottom', end: 'top 45%', scrub: 0.5 } })
         }
 
         // Relief au pointeur (souris uniquement : sur écran tactile, la parallaxe suffit)

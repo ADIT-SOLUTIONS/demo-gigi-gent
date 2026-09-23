@@ -246,10 +246,10 @@
   }
 }
 
-/* L'amore : manifeste qui s'allume mot à mot, photo qui se resserre ----------------------------------------------- */
+/* L'amore : manifeste qui s'allume phrase après phrase, photo qui se resserre ------------------------------------ */
 
 .eclat {
-  display: inline;
+  will-change: opacity;
 }
 
 .amore__masque {
@@ -756,4 +756,13 @@
   .decor-entre--roses .decor-entre__objet--2 {
     top: 30px;
   }
+}
+
+/* Éléments déplacés au défilement : couche dédiée dès le départ */
+[data-vitesse],
+.pilier__photo img,
+.carte-cadeau__photo img,
+.amore__image,
+.menu {
+  will-change: transform;
 }
