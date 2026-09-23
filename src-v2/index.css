@@ -241,8 +241,7 @@
   }
 
   .decor__citron--3 {
-    top: 11%;
-    width: 64px;
+    display: none;
   }
 }
 

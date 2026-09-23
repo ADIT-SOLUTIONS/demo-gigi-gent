@@ -1,3 +1,6 @@
+// Vérifie les replis de la maison 3D : « réduire les animations », navigateur sans WebGL, perte puis
+// restauration du contexte WebGL. Usage : npm run build && npm run preview -- --port 5192, puis
+// node scripts/tests-replis-3d.mjs <dossier-captures>
 import { chromium } from 'playwright-core'
 const URL = 'http://localhost:5192/'
 const SC = process.argv[2]
