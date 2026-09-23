@@ -129,7 +129,17 @@ export const neonFragment = /* glsl */ `
   varying vec2 vUv;
   void main() {
     vec3 c = texture2D(uCarte, vUv).rgb;
-    gl_FragColor = vec4(c * uNeon * 1.25, 1.0);
+    gl_FragColor = vec4(c * uNeon, 1.0);
+  }
+`
+
+/** Tube de néon : verre rose éteint, puis rose vif quand il s'allume. */
+export const tubeFragment = /* glsl */ `
+  uniform float uNeon;
+  void main() {
+    vec3 eteint = vec3(0.36, 0.16, 0.24);
+    vec3 allume = vec3(1.0, 0.5, 0.72);
+    gl_FragColor = vec4(mix(eteint, allume * 1.35, uNeon), 1.0);
   }
 `
 

@@ -286,28 +286,27 @@ export function textureSocle() {
   return texture(c, false)
 }
 
-/** Rose en néon : cœur presque blanc et halo rose, pour un plan en mélange additif. */
-export function textureRoseNeon() {
+/** Halo d'une rose en néon (le tube lui-même est en géométrie, net à toute taille), pour un plan additif. */
+export function textureHaloRose() {
   const T = 256
   const { c, ctx } = canevas(T, T)
   ctx.fillStyle = '#000'
   ctx.fillRect(0, 0, T, T)
-  const e = (T * 0.72) / ROSE.largeur
+  const e = (T * 0.62) / ROSE.largeur
   const chemin = new Path2D(ROSE.d)
-  const dessiner = (couleur: string, flou: number, passes: number) => {
-    for (let i = 0; i < passes; i++) {
-      ctx.save()
-      ctx.translate((T - ROSE.largeur * e) / 2, (T - ROSE.hauteur * e) / 2)
-      ctx.scale(e, e)
-      ctx.shadowColor = couleur
-      ctx.shadowBlur = flou
-      ctx.fillStyle = couleur
-      ctx.fill(chemin)
-      ctx.restore()
-    }
+  for (const [flou, alpha] of [
+    [30, 0.55],
+    [12, 0.5],
+  ] as const) {
+    ctx.save()
+    ctx.translate((T - ROSE.largeur * e) / 2, (T - ROSE.hauteur * e) / 2)
+    ctx.scale(e, e)
+    ctx.globalAlpha = alpha
+    ctx.shadowColor = '#ff2f74'
+    ctx.shadowBlur = flou
+    ctx.fillStyle = '#ff4f8c'
+    ctx.fill(chemin)
+    ctx.restore()
   }
-  dessiner('#ff2f74', 26, 3)
-  dessiner('#ff7fae', 8, 2)
-  dessiner('#ffe3ee', 0, 1)
   return texture(c, false)
 }

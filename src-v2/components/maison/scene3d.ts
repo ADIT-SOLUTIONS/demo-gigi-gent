@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js'
+import { ROSE } from '../../../src/data/emblemes'
 import { allumages, cadrage, neon, nouveauCadrage, ouverture, T_OUVERTURE, type Cadrage } from './sequence'
 import * as S from './shaders'
 import * as TX from './textures'
@@ -248,7 +250,7 @@ export async function creerScene(canvas: HTMLCanvasElement, options: OptionsScen
     bouteilles: garder(TX.textureBouteilles()),
     boite: garder(TX.textureBoite()),
     socle: garder(TX.textureSocle()),
-    rose: garder(TX.textureRoseNeon()),
+    haloRose: garder(TX.textureHaloRose()),
     fond: garder(TX.textureFond()),
   }
   scene.background = tx.fond
@@ -581,9 +583,10 @@ export async function creerScene(canvas: HTMLCanvasElement, options: OptionsScen
     lotsBattants[1].pierre,
     lotsBattants[1].uni,
   )
+  // Roses en néon : le tracé vectoriel de la rose de la carte en tube lumineux, et son halo
   const matNeon = garder(
     new THREE.ShaderMaterial({
-      uniforms: { uCarte: { value: tx.rose }, uNeon: { value: 0 } },
+      uniforms: { uCarte: { value: tx.haloRose }, uNeon: { value: 0 } },
       vertexShader: S.neonVertex,
       fragmentShader: S.neonFragment,
       transparent: true,
@@ -591,26 +594,43 @@ export async function creerScene(canvas: HTMLCanvasElement, options: OptionsScen
       blending: THREE.AdditiveBlending,
     }),
   )
-  const planRose = garder(new THREE.PlaneGeometry(1.5, 1.5))
+  const matTube = garder(
+    new THREE.ShaderMaterial({
+      uniforms: { uNeon: matNeon.uniforms.uNeon },
+      vertexShader: S.neonVertex,
+      fragmentShader: S.tubeFragment,
+      side: THREE.DoubleSide,
+    }),
+  )
+  const TAILLE_ROSE = 1.32
+  const tubeRose = (() => {
+    const svg = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${ROSE.d}"/></svg>`)
+    const formes = svg.paths.flatMap((p) => p.toShapes())
+    const k = TAILLE_ROSE / ROSE.largeur
+    return garder(new THREE.ShapeGeometry(formes, 6).translate(-ROSE.largeur / 2, -ROSE.hauteur / 2, 0).scale(k, -k, 1))
+  })()
+  const planHalo = garder(new THREE.PlaneGeometry(TAILLE_ROSE * 1.62, TAILLE_ROSE * 1.62))
   ;[battantGauche, battantDroit].forEach((groupe, i) => {
     const { pierre: lp, uni: lu } = lotsBattants[i]
     const mPierre = new THREE.Mesh(garder(lp.fusionner()), matPierre)
     const mUni = new THREE.Mesh(garder(lu.fusionner()), matUni)
     const contenu = new THREE.Group()
     contenu.add(mPierre, mUni)
-    // Potence et rose en néon, entre les arches du rez-de-chaussée
-    const potence = new THREE.Mesh(garder(new THREE.BoxGeometry(0.05, 0.05, 0.42).translate(3.0, 3.25, 0.5)), matUni)
-    potence.geometry.setAttribute('aCouleur', new THREE.BufferAttribute(new Float32Array(potence.geometry.getAttribute('position').count * 3).fill(0.12), 3))
-    potence.geometry.setAttribute('aPiece', new THREE.BufferAttribute(new Float32Array(potence.geometry.getAttribute('position').count).fill(RUE), 1))
-    potence.geometry.setAttribute('aEmission', new THREE.BufferAttribute(new Float32Array(potence.geometry.getAttribute('position').count).fill(0), 1))
-    const rose = new THREE.Mesh(planRose, matNeon)
-    rose.position.set(3.0, 2.75, 0.72)
-    rose.renderOrder = 10
-    contenu.add(potence, rose)
+    // Enseigne sur potence entre les arches du rez-de-chaussée, légèrement tournée comme sur la façade
+    const potence = new THREE.Mesh(garder(new THREE.BoxGeometry(0.05, 0.05, 0.5).translate(3.0, 3.18, 0.52)), matTube)
+    const enseigne = new THREE.Group()
+    enseigne.position.set(3.0, 2.68, 0.74)
+    enseigne.rotation.y = -0.32
+    const tube = new THREE.Mesh(tubeRose, matTube)
+    const halo = new THREE.Mesh(planHalo, matNeon)
+    halo.position.z = -0.02
+    halo.renderOrder = 10
+    enseigne.add(tube, halo)
+    contenu.add(potence, enseigne)
     if (i === 1) {
-      // Miroir : le battant droit s'étend à gauche de sa charnière
+      // Miroir : le battant droit s'étend à gauche de sa charnière ; la rose garde son sens de lecture
       contenu.scale.x = -1
-      rose.scale.x = -1 // la rose garde son sens de lecture
+      enseigne.scale.x = -1
     }
     groupe.add(contenu)
     scene.add(groupe)
@@ -618,8 +638,8 @@ export async function creerScene(canvas: HTMLCanvasElement, options: OptionsScen
   // Lueur rouge des néons sur le trottoir et le bas de la façade (s'éteint quand la façade s'ouvre)
   halos.push({ position: [-3.05, 1.6, AVANT + 1.4], taille: 6.5, teinte: '#b0123e', force: 0.55, piece: LUEUR })
   halos.push({ position: [3.05, 1.6, AVANT + 1.4], taille: 6.5, teinte: '#b0123e', force: 0.55, piece: LUEUR })
-  halos.push({ position: [-3.05, 2.75, AVANT + 0.75], taille: 2.4, teinte: '#ff2f74', force: 0.7, piece: LUEUR })
-  halos.push({ position: [3.05, 2.75, AVANT + 0.75], taille: 2.4, teinte: '#ff2f74', force: 0.7, piece: LUEUR })
+  halos.push({ position: [-3.05, 2.62, AVANT + 0.85], taille: 2.2, teinte: '#ff2f74', force: 0.35, piece: LUEUR })
+  halos.push({ position: [3.05, 2.62, AVANT + 0.85], taille: 2.2, teinte: '#ff2f74', force: 0.35, piece: LUEUR })
   await etape()
 
   /* Fusion des lots statiques : un maillage par matière */
