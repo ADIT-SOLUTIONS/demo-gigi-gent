@@ -39,3 +39,11 @@ Tous les repères entre crochets `[...]` se retrouvent avec une recherche de `[`
   animation GIF : des originaux en haute définition seraient plus nets.
 - Polices : Roslindale et Saa Series (identité Zware Jongens) sont payantes. Le site utilise des équivalents libres ;
   si Gigi possède les licences web, on peut les brancher.
+
+## Version immersive
+
+- La maison de poupée en 3D est une **évocation** d'après les photos : la répartition des pièces (grande salle et bar
+  au rez-de-chaussée, salle aux citrons et escalier vert à l'étage) et la façade en deux battants ne reprennent pas
+  le plan réel. À valider (ou à corriger avec un plan ou quelques photos de plus) avant de la montrer comme « le lieu ».
+- Les textes de chaque pièce décrivent ce qu'on voit sur leurs photos : à relire par l'équipe.
+- La légende « Évocation en 3D, d'après les photos du restaurant » est affichée sous le titre de la section.
